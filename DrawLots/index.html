@@ -2,6 +2,21 @@
 <head>
 <meta charset="gb2312" />
 <title>SimpleDrawLots - RZ1216</title>
+<!-- frameworks and plug-ins -->
+<link rel="stylesheet" type="text/css" href="../Commons/css/font-awesome.min.css">
+<!-- Bootstrap 核心 CSS 文件 -->
+<link href="../Commons/css/bootstrap.min.css" rel="stylesheet">
+<!-- jQuery文件,务必在bootstrap.min.js 之前引入 -->
+<script src="../Commons/js/jquery-3.3.1.min.js"></script>
+<!-- Bootstrap 核心 JavaScript 文件 -->
+<script src="../Commons/js/bootstrap.min.js"></script>
+<!-- sweet-alert2 -->
+<link rel="stylesheet" href="../Commons/sweet-alert2/sweetalert2.min.css">
+<script src="../Commons/sweet-alert2/sweetalert2.min.js"></script>
+<!-- loading -->
+<link href="../Commons/loading/loading.css" rel="stylesheet"/>
+<!-- frameworks and plug-ins -->
+
 <style type="text/css">
 footer {
     text-align: center;
@@ -17,6 +32,17 @@ footer.fixed-bottom {
 </style>
 
 <script script type="text/javascript">
+$(document).ready(function() {
+    Swal.fire({
+      position: 'center',
+      icon: 'success',
+      title: 'Thanks for using!',
+      showConfirmButton: false,
+      timer: 2000,
+      timerProgressBar: true
+    })
+});
+
 var reloadFlag = true;
 var arrResult = new Array();
 var arrResultFlag = new Array();
