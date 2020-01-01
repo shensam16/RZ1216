@@ -35,6 +35,37 @@ footer.fixed-bottom {
 }
 </style>
 
+</head>
+<body>
+<div style="margin-left:15px;margin-top:20px;">
+    <div id="fileZone">
+        <input type="file" name="file" id="filePicker" onchange="fileLoad();"/>
+        </br>
+        <div id="resultListDiv">
+        <textarea id="resultList" style="width:50%;height:40%;overflow:auto;" onchange="Reset();" >抽签名单&#13;一行一个&#13;支持去除空格及空行</textarea>
+        </div>
+    </div>
+    </br>
+    <div id="controlZone" style="margin-left:20px;">
+        <div class="btn-group btn-group-lg">
+            <button type="button" id="load" class="btn btn-default" onclick="fileLoad(); ">Load</button>
+            <button type="button" id="check" class="btn btn-default" onclick="Check();" >Check</button>
+        </div>
+            &nbsp;&nbsp;<button type="button" id="btn1" class="btn btn-success btn-lg" onclick="Go();" >Start</button>
+            &nbsp;&nbsp;<button type="button" id="reset" class="btn btn-danger btn-lg" onclick="Reset();" >Reset</button>
+            &nbsp;&nbsp;<button type="button" id="show" class="btn btn-info btn-lg" onclick="Show();" >Result</button>
+    </div>
+    </br>
+    <div id="resultZone" style="width:50%;text-align:center;">
+        <label id="resultLabel" style="font-size:50px;">简易抽签器1.1</label>
+    </div>
+</div>
+<footer class="fixed-bottom">
+<p>Developed by $K from <a href="https://github.com/shensam16/RZ1216" target="_blank">RZ1216</a></p>
+<footer>
+</body>
+
+
 <script script type="text/javascript">
 $(document).ready(function() {
     //thanks for using!
@@ -190,7 +221,7 @@ function Show()
 {
     var resultStr = "<div style='max-height:200px; overflow:auto;'>";
     for(index = 0; index < arrResult.length; index++) {
-        //if(arrResultFlag[index])
+        if(arrResultFlag[index])
             resultStr += "<p>" + arrResult[index] + "</p>";
     }
     resultStr += "</div>";
@@ -205,33 +236,5 @@ function Show()
 }
 
 </script>
-</head>
-<body>
-<div style="margin-left:15px;margin-top:20px;">
-    <div id="fileZone">
-        <input type="file" name="file" id="filePicker" onchange="fileLoad();"/>
-        </br>
-        <div id="resultListDiv">
-        <textarea id="resultList" style="width:50%;height:40%;overflow:auto;" onchange="Reset();" >抽签名单&#13;一行一个&#13;支持去除空格及空行</textarea>
-        </div>
-    </div>
-    </br>
-    <div id="controlZone" style="margin-left:20px;">
-        <div class="btn-group btn-group-lg">
-            <button type="button" id="load" class="btn btn-default" onclick="fileLoad(); ">Load</button>
-            <button type="button" id="check" class="btn btn-default" onclick="Check();" >Check</button>
-        </div>
-            &nbsp;&nbsp;<button type="button" id="btn1" class="btn btn-success btn-lg" onclick="Go();" >Start</button>
-            &nbsp;&nbsp;<button type="button" id="reset" class="btn btn-danger btn-lg" onclick="Reset();" >Reset</button>
-            &nbsp;&nbsp;<button type="button" id="show" class="btn btn-info btn-lg" onclick="Show();" >Result</button>
-    </div>
-    </br>
-    <div id="resultZone" style="width:50%;text-align:center;">
-        <label id="resultLabel" style="font-size:50px;">简易抽签器1.1</label>
-    </div>
-</div>
-<footer class="fixed-bottom">
-<p>Developed by $K from <a href="https://github.com/shensam16/RZ1216" target="_blank">RZ1216</a></p>
-<footer>
-</body>
+
 </html>
