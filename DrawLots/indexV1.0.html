@@ -29,15 +29,10 @@ footer.fixed-bottom {
     bottom: 0;
     width: 100%;
 }
-
-.swal2-popup {
-    font-size: 1.5rem;
-}
 </style>
 
 <script script type="text/javascript">
 $(document).ready(function() {
-    //thanks for using!
     Swal.fire({
       position: 'center',
       icon: 'success',
@@ -45,15 +40,12 @@ $(document).ready(function() {
       showConfirmButton: false,
       timer: 2000,
       timerProgressBar: true
-    });
+    })
 });
 
 var reloadFlag = true;
-//name list
 var arrResult = new Array();
-//is selected
 var arrResultFlag = new Array();
-//Count(selected guys)
 var luckyCount = 0;
 
 function getMin(a, b)
@@ -70,7 +62,6 @@ function Reset()
     reloadFlag = true;
     document.getElementById("btn1").value = "Start";
     document.getElementById("resultList").readOnly = false;
-    document.getElementById("load").disabled = false;
     document.getElementById("check").disabled = false;
     recordFlag = false;
     recordIndex = 0;
@@ -92,7 +83,6 @@ function fileLoad()
     reader.readAsText(f);
 }
 
-//Print lines without Space and bad lines
 function Check()
 {
     resultListLoad();
@@ -105,7 +95,6 @@ function Check()
     document.getElementById("resultList").value = distinctStr;
 }
 
-//get list from file
 function resultListLoad()
 {
     arrResult.length = 0;
@@ -134,19 +123,14 @@ function resultListLoad()
     }
 }
 
-//is changing
 var recordFlag = false;
-//selected index
 var recordIndex = 0;
-//for loop
 var recordCount = 0;
 var recordMax = 0;
-let timerInterval
 function Go()
 {
     if(reloadFlag) {    //initial at the first time
         document.getElementById("resultList").readOnly = true;
-        document.getElementById("load").disabled = true;
         document.getElementById("check").disabled = true;
         document.getElementById("btn1").value = "Next";
         resultListLoad();
@@ -157,8 +141,12 @@ function Go()
     console.log("Random:"+recordMax);
     recordCount = 0;
     recordFlag = true;
-    timerInterval = setInterval(() => {
-      if(recordFlag) {
+    
+}
+
+//var clk = 0;
+setInterval(function () {  
+    if(recordFlag) {
         if(recordCount <= recordMax) {
             recordCount++;
             recordIndex = (++recordIndex) % arrResult.length;
@@ -172,15 +160,14 @@ function Go()
                 Go();
             } else {
                 document.getElementById("resultLabel").innerText = arrResult[recordIndex];
-                console.log("Lucky Guy:" + arrResult[recordIndex]);
+                console.log("Lucky:" + arrResult[recordIndex]);
                 arrResultFlag[recordIndex] = true;
                 luckyCount++;
-                clearInterval(timerInterval);
             }
         }
-      }
-    }, 100);
-}
+    }
+    //console.log(clk++);
+}, 100);
 
 function getRandom(lower, upper) {
 	return Math.floor(Math.random() * (upper - lower+1)) + lower;
@@ -188,20 +175,12 @@ function getRandom(lower, upper) {
 
 function Show()
 {
-    var resultStr = "<div style='max-height:200px; overflow:auto;'>";
+    var resultStr = "Congratulations:\n";
     for(index = 0; index < arrResult.length; index++) {
-        //if(arrResultFlag[index])
-            resultStr += "<p>" + arrResult[index] + "</p>";
+        if(arrResultFlag[index])resultStr += arrResult[index] + "\n";
     }
-    resultStr += "</div>";
     console.log(resultStr);
-    Swal.fire({
-      position: 'center',
-      icon: 'success',
-      title: 'Congratulations!',
-      html: resultStr,
-      showConfirmButton: true
-    });
+    alert(resultStr);
 }
 
 </script>
@@ -209,25 +188,26 @@ function Show()
 <body>
 <div style="margin-left:15px;margin-top:20px;">
     <div id="fileZone">
-        <input type="file" name="file" id="filePicker" onchange="fileLoad();"/>
-        </br>
+        <input type="file" name="file" id="filePicker" onchange="fileLoad();"/>&nbsp;&nbsp;
+        <input type="button" value="Load" onclick="fileLoad();"/>
+        </br></br>
         <div id="resultListDiv">
-        <textarea id="resultList" style="width:50%;height:40%;overflow:auto;" onchange="Reset();" >抽签名单&#13;一行一个&#13;支持去除空格及空行</textarea>
+        <textarea id="resultList" style="width:50%;height:30%;overflow:auto;" onchange="Reset();" >抽签名单&#13;一行一个&#13;支持去除空格及空行</textarea>
         </div>
     </div>
     </br>
     <div id="controlZone" style="margin-left:20px;">
-        <div class="btn-group btn-group-lg">
-            <button type="button" id="load" class="btn btn-default" onclick="fileLoad(); ">Load</button>
-            <button type="button" id="check" class="btn btn-default" onclick="Check();" >Check</button>
-        </div>
-            &nbsp;&nbsp;<button type="button" id="btn1" class="btn btn-success btn-lg" onclick="Go();" >Start</button>
-            &nbsp;&nbsp;<button type="button" id="reset" class="btn btn-danger btn-lg" onclick="Reset();" >Reset</button>
-            &nbsp;&nbsp;<button type="button" id="show" class="btn btn-info btn-lg" onclick="Show();" >Result</button>
+        <input type="button" id="check" value="Check" onclick="Check();" style="width:80px;height:40px;font-size:20px;" />
+        &nbsp;&nbsp;
+        <input type="button" id="btn1" value="Start" onclick="Go();" style="width:80px;height:40px;font-size:20px;" />
+        &nbsp;&nbsp;
+        <input type="button" id="reset" value="Reset" onclick="Reset();" style="width:80px;height:40px;font-size:20px;" />
+        &nbsp;&nbsp;
+        <input type="button" id="show" value="Result" onclick="Show();" style="width:80px;height:40px;font-size:20px;" />
     </div>
     </br>
     <div id="resultZone" style="width:50%;text-align:center;">
-        <label id="resultLabel" style="font-size:50px;">简易抽签器1.1</label>
+        <label id="resultLabel" style="font-size:50px;">简易抽签器1.0</label>
     </div>
 </div>
 <footer class="fixed-bottom">
