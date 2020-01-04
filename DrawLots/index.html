@@ -28,21 +28,30 @@ footer.fixed-bottom {
     position: fixed;
     bottom: 0;
     width: 100%;
+    padding-top:10px;
 }
 
 .swal2-popup {
     font-size: 1.5rem;
 }
+
+.form-control {
+    display: inline;    <!-- work with text-align:center; -->
+}
+
+input[type=file] {
+    display: inline; 
+}
 </style>
 
 </head>
 <body>
-<div style="margin-left:15px;margin-top:20px;">
+<div style="margin-left:15px;margin-top:20px;text-align:center;">
     <div id="fileZone">
-        <input type="file" name="file" id="filePicker" onchange="fileLoad();"/>
-        </br>
+        <input type="file" class="form-control" name="file" id="filePicker" onchange="fileLoad();" style="width:60%;" />
+        </br></br>
         <div id="resultListDiv">
-        <textarea id="resultList" style="width:50%;height:40%;overflow:auto;" onchange="Reset();" >抽签名单&#13;一行一个&#13;支持去除空格及空行</textarea>
+        <textarea id="resultList" class="form-control" style="width:60%;height:40%;overflow:auto;" onchange="Reset();" >抽签名单&#13;一行一个&#13;支持去除空格及空行</textarea>
         </div>
     </div>
     </br>
@@ -56,8 +65,8 @@ footer.fixed-bottom {
             &nbsp;&nbsp;<button type="button" id="show" class="btn btn-info btn-lg" onclick="Show();" >Result</button>
     </div>
     </br>
-    <div id="resultZone" style="width:50%;text-align:center;">
-        <label id="resultLabel" style="font-size:50px;">简易抽签器1.1</label>
+    <div id="resultZone" style="width:100%;text-align:center;">
+        <label id="resultLabel" style="font-size:50px;">简易抽签器 v1.2</label>
     </div>
 </div>
 <footer class="fixed-bottom">
