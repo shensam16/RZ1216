@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Birthday Wall - RZ1216</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <!-- frameworks and plug-ins -->
+    <link rel="stylesheet" type="text/css" href="../Commons/css/font-awesome.min.css">
+    <!-- Bootstrap 核心 CSS 文件 -->
+    <link href="../Commons/css/bootstrap.min.css" rel="stylesheet">
+    <!-- jQuery文件,务必在bootstrap.min.js 之前引入 -->
+    <script src="../Commons/js/jquery-3.3.1.min.js"></script>
+    <!-- Bootstrap 核心 JavaScript 文件 -->
+    <script src="../Commons/js/bootstrap.min.js"></script>
+    <!-- sweet-alert2 -->
+    <link rel="stylesheet" href="../Commons/sweet-alert2/sweetalert2.min.css">
+    <script src="../Commons/sweet-alert2/sweetalert2.min.js"></script>
+    <!-- loading -->
+    <link href="../Commons/loading/loading.css" rel="stylesheet"/>
+    <!-- frameworks and plug-ins : DONE -->
+    <style>
+    
+        .swal2-popup {
+            font-size: 1.5rem;
+        }
+    
+        html {
+            height: 100%;
+        }
+        body {
+            font-family: "Helvetica Neue", "Luxi Sans", "DejaVu Sans", Tahoma, "Hiragino Sans GB", "Microsoft Yahei", sans-serif;
+            background: #79a8ae;
+            color: #CFEBE4;
+            font-size: 18px;
+            line-height: 2;
+            letter-spacing: 1.2px;
+            margin: 0;
+        }
+        a {
+            color: #ebf7f4;
+        }
+        .body--ready {
+            background: -webkit-linear-gradient(top, rgb(203, 235, 219) 0%, rgb(55, 148, 192) 120%);
+            background: -moz-linear-gradient(top, rgb(203, 235, 219) 0%, rgb(55, 148, 192) 120%);
+            background: -o-linear-gradient(top, rgb(203, 235, 219) 0%, rgb(55, 148, 192) 120%);
+            background: -ms-linear-gradient(top, rgb(203, 235, 219) 0%, rgb(55, 148, 192) 120%);
+            background: linear-gradient(top, rgb(203, 235, 219) 0%, rgb(55, 148, 192) 120%);
+        }
+        .text {
+            position: fixed;
+            bottom: 100px;
+            text-align: center;
+            width: 100%;
+        }
+        .canvas {
+            margin: 0 auto;
+            display: block;
+        }
+        img#logo {
+            width: 128px;
+            background-size: cover;
+            border-radius: 200px;
+            box-shadow: 0px 0px 40px rgba(63, 81, 181, 0.72);
+            border: 3px solid #00a0ff;
+            opacity: 1;
+            margin: 0 auto;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            transition: all 1.0s;
+        }
+        #logo:hover {
+            box-shadow: 0 0 10px #fff;
+            -webkit-box-shadow: 0 0 19px #fff;
+            transform: rotate(360deg);
+            -ms-transform: rotate(360deg); /* IE 9 */
+            -moz-transform: rotate(360deg); /* Firefox */
+            -webkit-transform: rotate(360deg); /* Safari 和 Chrome */
+            -o-transform: rotate(360deg); /* Opera */
+            filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
+        }
+        .cs {
+            width: 100%;
+            height: 100%;
+            margin: 0 auto;
+            position: absolute;
+            text-align: center;
+        }
+        .text {
+            position: fixed;
+            bottom: 80px;
+            text-align: center;
+            width: 100%;
+            font-weight: bold;
+        }
+        .text-right {
+            position: fixed;
+            bottom: 50px;
+            text-align: right;
+            width: 100%;
+            font-weight: bold;
+        }
+    </style>
+
+</head>
+
+<body>
+<div class="cs">
+    <img src="1216.jpg" id="logo">
+</div>
+<canvas class="canvas" width="1820" height="905"></canvas>
+<p class="text" style="color: #FFFFFF;font-size:12px;">
+    <audio id="audio" controls="controls" autoplay="autoplay" loop="loop">
+      <source src="happybirthday.mp3" type="audio/mpeg" />
+    Your browser does not support the audio element.
+    </audio>
+    </br>
+    Texts from <a href="https://www.zhihu.com/question/30427321?sort=created" target="_blank">Zhihu</a>
+    </br>
+    Main Frame by <a href="https://github.com/Junrui-L/Happy-birthDay" target="_blank">Junrui-L</a>
+    </br>
+    Developed by $K from <a href="https://github.com/shensam16/RZ1216" target="_blank">RZ1216</a>
+    
+    <span id="span_dt_dt"></span>
+</p>
+<script src="16birth.js"></script>
+<script src="GetLunarCalendarFunction.js"></script>
+<script src="Festival.js"></script>
+<script script type="text/javascript">
+//get Date
+function getDate() {
+    todayDate = new Date();
+    todayDate.setTime(todayDate.getTime());
+    yy=todayDate.getFullYear();
+    mm=todayDate.getMonth()+1;
+    dd=todayDate.getDate();
+    var ss=parseInt(todayDate.getTime() / 1000);
+    if (yy<100) yy="19"+yy;
+    //todayStr = todayDate.getFullYear()+"-" + (todayDate.getMonth()+1) + "-" + todayDate.getDate();
+    todayStr = GetLunarDay(yy,mm,dd);
+    console.log("Get Date : " + todayDate.getFullYear() + "." + (todayDate.getMonth()+1) + "." + todayDate.getDate() + " - " + todayStr);
+    return todayStr;
+}
+var todayDateStr;
+var HappyBirthDay = new Array();
+function Load() {
+    //console.log(BirthNameArr);
+    //console.log(BirthDayArr);
+    todayDateStr = getDate();
+    todayDateSolarStr = mm + "." + dd;
+    todayDateLunarArr = todayDateStr.split(" ");
+    todayDateLunarStr = todayDateLunarArr[1];
+    
+    //who is birthday
+    for(i = 0; i < BirthDayArr.length; i++) {
+        if(todayDateSolarStr == BirthDayArr[i] || todayDateLunarStr == BirthDayArr[i]) {
+            HappyBirthDay.push(BirthNameArr[i]);
+        }
+    }
+    console.log("HappyBirthDay : " + HappyBirthDay);
+    var hpyWords = "";
+    if(HappyBirthDay.length > 0) {
+        hpyWords += "FROM RZ1216|#countdown 3|致";
+        for(i = 0; i < HappyBirthDay.length; i++) {
+            if(i == 0) {
+                hpyWords += HappyBirthDay[i];
+                }
+            else {
+                hpyWords += "|&" + HappyBirthDay[i];
+                }
+        }
+        hpyWords += ":|"+blessingNewArr[getRandom(0, blessingNewArr.length-1)]+"|#rectangle 15x15|"+yy+"."+mm+"."+dd+"|"+todayDateLunarArr[0]+"|"+todayDateLunarArr[1]+"|祝您：|幸福安康|阖家欢乐|万事胜意|生日快乐 : )";
+    }
+    return hpyWords;
+}
+
+function getRandom(lower, upper) {
+	return Math.floor(Math.random() * (upper - lower+1)) + lower;
+}
+</script>
+<script language="javascript">
+    /*
+    function show_date_time() {
+        window.setTimeout("show_date_time()", 1000);
+        BirthDay = new Date("01/01/2020 00:00:00");
+        today = new Date();
+        timeold = (today.getTime() - BirthDay.getTime());
+        sectimeold = timeold / 1000
+        secondsold = Math.floor(sectimeold);
+        msPerDay = 24 * 60 * 60 * 1000
+        e_daysold = timeold / msPerDay
+        daysold = Math.floor(e_daysold);
+        e_hrsold = (e_daysold - daysold) * 24;
+        hrsold = Math.floor(e_hrsold);
+        e_minsold = (e_hrsold - hrsold) * 60;
+        minsold = Math.floor((e_hrsold - hrsold) * 60);
+        seconds = Math.floor((e_minsold - minsold) * 60);
+        span_dt_dt.innerHTML = daysold + "天" + hrsold + "小时" + minsold + "分" + seconds + "秒";
+    }
+    show_date_time();
+    */
+    $(document).ready(function() {
+        //thanks for using!
+        //make sure audio can autoplay
+        Swal.fire({
+          allowOutsideClick: false,
+          position: 'center',
+          icon: 'success',
+          title: 'Thanks for visiting!\n\n手机横屏观赏更佳，\n点击"OK"按钮以继续。',
+          showConfirmButton: true,
+          //timer: 5000,
+          //timerProgressBar: true
+        }).then((result) => {
+          if (result.value) {
+           hpw = Load();
+           if(hpw != ""){
+                S.init(hpw);
+                let audio = document.getElementById("audio");
+                let audioPlay = audio.play();
+                audioPlay.then(()=>{
+                    console.log('可以自动播放');
+                }).catch((err)=>{
+                    console.log(err);
+                    console.log("不允许自动播放");
+                    //音频元素只在用户交互后调用.play(),
+                    // ...
+                });
+                document.addEventListener("WeixinJSBridgeReady", function () {
+                    audio.play();
+                }, false);
+                document.addEventListener('YixinJSBridgeReady', function () {
+                    audio.play();
+                }, false);
+            } else {
+                S.init("Nobody :)");
+            }
+          }
+        })
+        
+    });
+</script>
+<script src="draw.js"></script>
+</body>
+</html>

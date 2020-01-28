@@ -1,0 +1,164 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>Birthday Wall - RZ1216</title>
+
+<!-- frameworks and plug-ins -->
+<link rel="stylesheet" type="text/css" href="../Commons/css/font-awesome.min.css">
+<!-- Bootstrap 核心 CSS 文件 -->
+<link href="../Commons/css/bootstrap.min.css" rel="stylesheet">
+<!-- jQuery文件,务必在bootstrap.min.js 之前引入 -->
+<script src="../Commons/js/jquery-3.3.1.min.js"></script>
+<!-- Bootstrap 核心 JavaScript 文件 -->
+<script src="../Commons/js/bootstrap.min.js"></script>
+<!-- sweet-alert2 -->
+<link rel="stylesheet" href="../Commons/sweet-alert2/sweetalert2.min.css">
+<script src="../Commons/sweet-alert2/sweetalert2.min.js"></script>
+<!-- loading -->
+<link href="../Commons/loading/loading.css" rel="stylesheet"/>
+<!-- frameworks and plug-ins : END -->
+
+<style type="text/css">
+footer {
+    text-align: center;
+    background-color: #d2d8dd;
+    font-size: 16px;
+}
+
+footer.fixed-bottom {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    padding-top:10px;
+}
+
+.swal2-popup {
+    font-size: 1.5rem;
+}
+
+.form-control {
+    display: inline;    <!-- work with text-align:center; -->
+}
+
+input[type=file] {
+    display: inline; 
+}
+
+.input-group-addon:hover{
+    color: #59a6f7;
+}
+</style>
+
+</head>
+<body style="margin-top:20px;text-align:center;">
+<div style="margin-left:15px;margin-top:20px;" id="dateZone">
+    <div id="dateZone1"></div>
+    <div id="dateZone2DIV" style="text-align:center;">
+        <div id="dateZone2" style="margin-top:0px;text-align:left;display:inline-table;font-size:25px;"></div>
+    </div>
+</div>
+</div>
+<footer class="fixed-bottom">
+<p>
+Texts from <a href="https://www.zhihu.com/question/30427321?sort=created" target="_blank">Zhihu</a>
+</br>
+Developed by $K from <a href="https://github.com/shensam16/RZ1216" target="_blank">RZ1216</a>
+</p>
+<footer>
+</body>
+</html>
+
+
+<script script type="text/javascript">
+
+</script>
+
+<script src="16birth.js"></script>
+<script src="GetLunarCalendarFunction.js"></script>
+<script src="Festival.js"></script>
+<script script type="text/javascript">
+//get Date
+function getDate() {
+    todayDate = new Date();
+    todayDate.setTime(todayDate.getTime());
+    yy=todayDate.getFullYear();
+    mm=todayDate.getMonth()+1;
+    dd=todayDate.getDate();
+    var ss=parseInt(todayDate.getTime() / 1000);
+    if (yy<100) yy="19"+yy;
+    //todayStr = todayDate.getFullYear()+"-" + (todayDate.getMonth()+1) + "-" + todayDate.getDate();
+    todayStr = GetLunarDay(yy,mm,dd);
+    console.log("Get Date : " + todayDate.getFullYear() + "." + (todayDate.getMonth()+1) + "." + todayDate.getDate() + " - " + todayStr);
+    return todayStr;
+}
+
+$(document).ready(function() {
+    //thanks for using!
+    Swal.fire({
+      position: 'center',
+      icon: 'success',
+      title: 'Thanks for using!',
+      showConfirmButton: false,
+      timer: 2000,
+      timerProgressBar: true
+    });
+    Load();
+});
+
+var todayDateStr;
+var HappyBirthDay = new Array();
+function Load() {
+    //console.log(BirthNameArr);
+    //console.log(BirthDayArr);
+    todayDateStr = getDate();
+    todayDateSolarStr = mm + "." + dd;
+    todayDateLunarArr = todayDateStr.split(" ");
+    todayDateLunarStr = todayDateLunarArr[1];
+    
+    //print date
+    div1 = document.getElementById("dateZone1");
+    today=new Date();
+    div1.innerHTML += "<p style='font-size:20px;'>"
+                    + yy+"年"+mm+"月"+dd+"日 "+d[today.getDay()+1]
+                    + "&nbsp;&nbsp;"+todayDateStr
+                    + "</p>";
+    for(i = 0; i < Festival.length; i = i + 2) {
+        if(todayDateSolarStr == Festival[i] || todayDateLunarStr == Festival[i]) {
+            div1.innerHTML += "<p style='font-size:30px;color:pink;'>" + Festival[i+1] + "</p>";
+        }
+    }
+    
+    //who is birthday
+    div2 = document.getElementById("dateZone2");
+    if(todayDateSolarStr == "12.16") {
+        div2.innerHTML += "<img src='1216.jpg' alt='一二一六生日快乐~' height='50%' />"
+    }
+    for(i = 0; i < BirthDayArr.length; i++) {
+        if(todayDateSolarStr == BirthDayArr[i] || todayDateLunarStr == BirthDayArr[i]) {
+            HappyBirthDay.push(BirthNameArr[i]);
+        }
+    }
+    console.log("HappyBirthDay : " + HappyBirthDay);
+    if(HappyBirthDay.length > 0) {
+        htmlTemp = "<p style='font-size:30px;color:pink;'>";
+        htmlTemp2 = "</br></br>致";
+        for(i = 0; i < HappyBirthDay.length; i++) {
+            if(i == 0) {
+                htmlTemp += HappyBirthDay[i];
+                htmlTemp2 += HappyBirthDay[i];
+                }
+            else {
+                htmlTemp += "&" + HappyBirthDay[i];
+                htmlTemp2 += "&" + HappyBirthDay[i];
+                }
+        }
+        htmlTemp += " 生日快乐~</p>";
+        div1.innerHTML += htmlTemp;
+        div2.innerHTML += htmlTemp2 + ":</br></br>&nbsp;&nbsp;&nbsp;&nbsp;" + blessingNewArr[getRandom(0, blessingArr.length-1)] + "</br></br>&nbsp;&nbsp;&nbsp;&nbsp;生日快乐~ : )";
+    }
+}
+
+function getRandom(lower, upper) {
+	return Math.floor(Math.random() * (upper - lower+1)) + lower;
+}
+</script>
