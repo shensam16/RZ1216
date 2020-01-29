@@ -335,12 +335,10 @@
         function isNumber(n) {
             return !isNaN(parseFloat(n)) && isFinite(n);
         }
-        function init() {
+        function initCanvas() {
             fit();
             window.addEventListener('resize', fit);
         }
-        // Init
-        init();
         return {
             imageFile: function (url, callback) {
                 var image = new Image(),

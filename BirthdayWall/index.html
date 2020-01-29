@@ -252,6 +252,8 @@ function getRandom(lower, upper) {
           //timer: 5000,
           //timerProgressBar: true
         }).then((result) => {
+            // Init
+            initCanvas();
           if (result.value) {
            hpw = Load();
            if(hpw != ""){
