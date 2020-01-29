@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>HorizontalScreen</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    
+    <style>
+    ul,
+    li {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+    .center {
+        margin: auto;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        width: 90px;
+        /* height: 155px; */
+        /* Smartphone */
+    }
+    .smartphone {
+        width: 80px;
+        height: 120px;
+        margin: 5px 0 0 40px;
+        border: 5px #e1e1e1 solid;
+        border-top-width: 15px;
+        border-bottom-width: 20px;
+        border-radius: 4px;
+        -webkit-animation: smartphone 2s ease-in-out infinite;
+        animation: smartphone 2s ease-in-out infinite;
+    }
+    @-webkit-keyframes smartphone {
+        0% {
+            -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+            opacity: 0;
+        }
+        25% {
+            -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+            opacity: 1;
+        }
+        50% {
+            -webkit-transform: rotate(-90deg);
+            transform: rotate(-90deg);
+        }
+        75% {
+            opacity: 1;
+        }
+        100% {
+            -webkit-transform: rotate(-90deg);
+            transform: rotate(-90deg);
+            opacity: 0;
+        }
+    }
+    @keyframes smartphone {
+        0% {
+            -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+            opacity: 0;
+        }
+        25% {
+            -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+            opacity: 1;
+        }
+        50% {
+            -webkit-transform: rotate(-90deg);
+            transform: rotate(-90deg);
+        }
+        75% {
+            opacity: 1;
+        }
+        100% {
+            -webkit-transform: rotate(-90deg);
+            transform: rotate(-90deg);
+            opacity: 0;
+        }
+    }
+    .smartphone:before {
+        content: '';
+        display: block;
+        width: 10px;
+        height: 3px;
+        margin: -9px auto;
+        background: #c8c8c8;
+        border-radius: 4px;
+    }
+    .smartphone:after {
+        content: '';
+        display: block;
+        width: 12px;
+        height: 12px;
+        margin: 4px auto;
+        background: #c8c8c8;
+        border-radius: 10px;
+    }
+    .smartphone .content {
+        width: 60px;
+        height: 100px;
+        margin: 15px 0 0 0;
+        padding: 10px;
+        background: #9b3c6f;
+        color: #762e55;
+        font-size: 0.5em;
+        overflow: hidden;
+    }
+    .smartphone ul li {
+        height: 6px;
+        margin: 0 0 5px 0;
+        border-color: #762e55;
+        background: #762e55;
+    }
+    .smartphone ul {
+        -webkit-animation: screen 2s ease-in-out infinite;
+        animation: screen 2s ease-in-out infinite;
+    }
+    @-webkit-keyframes screen {
+        0% {
+            -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+            opacity: 0;
+        }
+        25% {
+            opacity: 1;
+            -webkit-transform-origin: left;
+            transform-origin: left;
+            -webkit-transform: rotate(0deg) translateY(0%) translateX(0%) scaleX(1);
+            transform: rotate(0deg) translateY(0%) translateX(0%) scaleX(1);
+        }
+        50% {
+            -webkit-transform-origin: left;
+            transform-origin: left;
+            -webkit-transform: rotate(90deg) translateY(-1%) translateX(-217%) scaleX(1.7);
+            transform: rotate(90deg) translateY(-1%) translateX(-217%) scaleX(1.7);
+        }
+        75% {
+            opacity: 1;
+        }
+        100% {
+            -webkit-transform-origin: left;
+            transform-origin: left;
+            -webkit-transform: rotate(90deg) translateY(-1%) translateX(-217%) scaleX(1.7);
+            transform: rotate(90deg) translateY(-1%) translateX(-217%) scaleX(1.7);
+            opacity: 0;
+        }
+    }
+    @keyframes screen {
+        0% {
+            -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+            opacity: 0;
+        }
+        25% {
+            opacity: 1;
+            -webkit-transform-origin: left;
+            transform-origin: left;
+            -webkit-transform: rotate(0deg) translateY(0%) translateX(0%) scaleX(1);
+            transform: rotate(0deg) translateY(0%) translateX(0%) scaleX(1);
+        }
+        50% {
+            -webkit-transform-origin: left;
+            transform-origin: left;
+            -webkit-transform: rotate(90deg) translateY(-1%) translateX(-217%) scaleX(1.7);
+            transform: rotate(90deg) translateY(-1%) translateX(-217%) scaleX(1.7);
+        }
+        75% {
+            opacity: 1;
+        }
+        100% {
+            -webkit-transform-origin: left;
+            transform-origin: left;
+            -webkit-transform: rotate(90deg) translateY(-1%) translateX(-217%) scaleX(1.7);
+            transform: rotate(90deg) translateY(-1%) translateX(-217%) scaleX(1.7);
+            opacity: 0;
+        }
+    }
+    </style>
+
+</head>
+
+<body>
+    <div class='center'>
+        <div class='smartphone'>
+            <div class='content'>
+                <ul>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li style='width: 90%'></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li style='width: 60%'></li>
+                    <li></li>
+                    <li></li>
+                    <li style='width: 70%'></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
