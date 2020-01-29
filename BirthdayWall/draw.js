@@ -285,7 +285,7 @@
             fontSize = window.innerHeight * 0.4,
             fontFamily = 'Avenir, Helvetica Neue, Helvetica, Arial, sans-serif';
         function fit() {
-            alert("w:"+window.innerWidth+"  h:"+window.innerHeight);
+            //alert("w:"+window.innerWidth+"  h:"+window.innerHeight);
             console.log("w:"+window.innerWidth+"  h:"+window.innerHeight);
             if(window.innerWidth < 1000 || window.innerHeight < 500) {
                 pointSize = 2;
@@ -336,12 +336,12 @@
         function isNumber(n) {
             return !isNaN(parseFloat(n)) && isFinite(n);
         }
-        function initCanvas() {
+        function init() {
             fit();
             window.addEventListener('resize', fit);
         }
         // Init
-        initCanvas();
+        //init();
         return {
             imageFile: function (url, callback) {
                 var image = new Image(),
@@ -389,6 +389,9 @@
                     }
                 }
                 return {dots: dots, w: width, h: height};
+            },
+            initCanvas: function() {
+                init();
             }
         };
     }());
