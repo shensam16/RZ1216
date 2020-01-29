@@ -39,7 +39,7 @@
                 requestFrame.call(window, this.loop.bind(this));
             },
             adjustCanvas: function () {
-                canvas.width = window.innerWidth - 15;
+                canvas.width = window.innerWidth * 0.99;
                 canvas.height = window.innerHeight * 0.85;
             },
             clearFrame: function () {
