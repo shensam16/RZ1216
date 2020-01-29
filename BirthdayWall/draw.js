@@ -277,9 +277,9 @@
             this._draw();
         }
     };
-    var pointSize = 5;  //Point size
+    var pointSize = 4;  //Point size
     S.ShapeBuilder = (function () {
-        var gap = 12,   //Ponit gap
+        var gap = 10,   //Ponit gap
             shapeCanvas = document.createElement('canvas'),
             shapeContext = shapeCanvas.getContext('2d'),
             fontSize = window.innerHeight * 0.4,
@@ -288,10 +288,10 @@
             console.log("w:"+window.innerWidth+"  h:"+window.innerHeight);
             if(window.innerWidth < 1000 || window.innerHeight < 500) {
                 pointSize = 2;
-                gap = 5;
+                gap = 6;
             } else {
-                pointSize = 5;
-                gap = 12;
+                pointSize = 4;
+                gap = 10;
             }
             shapeCanvas.width = Math.floor(window.innerWidth / gap) * gap;
             shapeCanvas.height = Math.floor(window.innerHeight / gap) * gap;
