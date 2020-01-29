@@ -169,6 +169,21 @@
             return 'rgba(' + this.r + ',' + +this.g + ',' + this.b + ',' + this.a + ')';
         }
     };
+    
+    function getRandom(lower, upper) {
+        return Math.floor(Math.random() * (upper - lower+1)) + lower;
+    }
+    var dotColor = [
+        255,255,255,'white',
+        255,220,240,'pink',
+        255,255,210,'yellow',
+        255,200,150,'orange',
+        240,128,128,'red',
+        225,225,225,'sliver'
+        ];
+    randomColorTemp = getRandom(0, dotColor.length-1);
+    var randomColor = randomColorTemp - (randomColorTemp%4);
+    console.log("Dot Color : " + dotColor[randomColor+3]);
     S.Dot = function (x, y) {
         this.p = new S.Point({
             x: x,
@@ -179,7 +194,7 @@
         });
         this.e = 0.07;
         this.s = true;
-        this.c = new S.Color(255, 255, 255, this.p.a);
+        this.c = new S.Color(dotColor[randomColor], dotColor[randomColor+1], dotColor[randomColor+2], this.p.a);
         this.t = this.clone();
         this.q = [];
     };
@@ -262,13 +277,22 @@
             this._draw();
         }
     };
+    var pointSize = 5;  //Point size
     S.ShapeBuilder = (function () {
-        var gap = 13,
+        var gap = 12,   //Ponit gap
             shapeCanvas = document.createElement('canvas'),
             shapeContext = shapeCanvas.getContext('2d'),
-            fontSize = 500,
+            fontSize = window.innerHeight * 0.4,
             fontFamily = 'Avenir, Helvetica Neue, Helvetica, Arial, sans-serif';
         function fit() {
+            console.log("w:"+window.innerWidth+"  h:"+window.innerHeight);
+            if(window.innerWidth < 1000 || window.innerHeight < 500) {
+                pointSize = 2;
+                gap = 5;
+            } else {
+                pointSize = 5;
+                gap = 12;
+            }
             shapeCanvas.width = Math.floor(window.innerWidth / gap) * gap;
             shapeCanvas.height = Math.floor(window.innerHeight / gap) * gap;
             shapeContext.fillStyle = 'red';
@@ -424,7 +448,7 @@
                         x: n.dots[i].x + cx,
                         y: n.dots[i].y + cy,
                         a: 1,
-                        z: 5,
+                        z: pointSize,   //control point size
                         h: 0
                     }));
                     n.dots = n.dots.slice(0, i).concat(n.dots.slice(i + 1));
