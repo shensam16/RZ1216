@@ -140,6 +140,7 @@
 <script src="16birth.js"></script>
 <script src="GetLunarCalendarFunction.js"></script>
 <script src="Festival.js"></script>
+<script src="draw.js"></script>
 <script script type="text/javascript">
 //get Date
 function getDate() {
@@ -252,6 +253,7 @@ function getRandom(lower, upper) {
           //timer: 5000,
           //timerProgressBar: true
         }).then((result) => {
+            S.ShapeBuilder.initCanvas();
           if (result.value) {
            hpw = Load();
            if(hpw != ""){
@@ -274,6 +276,5 @@ function getRandom(lower, upper) {
         
     });
 </script>
-<script src="draw.js"></script>
 </body>
 </html>
