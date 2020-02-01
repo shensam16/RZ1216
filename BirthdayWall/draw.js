@@ -183,6 +183,7 @@
         ];
     randomColorTemp = getRandom(0, dotColor.length-1);
     var randomColor = randomColorTemp - (randomColorTemp%4);
+    //randomColor = 12;
     console.log("Dot Color : " + dotColor[randomColor+3]);
     S.Dot = function (x, y) {
         this.p = new S.Point({
