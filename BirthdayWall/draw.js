@@ -174,16 +174,16 @@
         return Math.floor(Math.random() * (upper - lower+1)) + lower;
     }
     var dotColor = [
-        255,255,255,'white',
-        255,220,240,'pink',
-        255,255,210,'yellow',
-        255,200,150,'orange',
-        240,128,128,'red',
-        225,225,225,'sliver'
+        255,255,255,'white',        //0-white
+        255,220,240,'pink',         //4-pink
+        255,255,210,'yellow',       //8-yellow
+        255,200,150,'orange',       //12-orange
+        240,128,128,'red',          //16-red
+        225,225,225,'sliver'        //20-sliver
         ];
     randomColorTemp = getRandom(0, dotColor.length-1);
     var randomColor = randomColorTemp - (randomColorTemp%4);
-    //randomColor = 12;
+    //randomColor = 4;
     console.log("Dot Color : " + dotColor[randomColor+3]);
     S.Dot = function (x, y) {
         this.p = new S.Point({
