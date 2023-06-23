@@ -24,13 +24,19 @@
   *					(1) type 0/1 : not necessary (default 1000ms, set by DEF_SLP_TIME in "win_simu.h")
   *					(2) type 9 : <=0 means pause until input a char, >0 means pause for specific microseconds
   *							tip: "1 9 0 slp" is recommended
-  *		3. dev = 9 = pause
+  *		3. dev = 8 = loop
+  *			- cmd : dev typ (num)
+  *				- dev : must be 8
+  *				- typ : 0-begin, 1-end
+  *				- num : number of loop times, =1 by default (no need while type=1 for end loop)
+				NOTE: only support single layer loop!
+  *		4. dev = 9 = pause
   *			- cmd : dev slp
   *				- dev : must be 9
   *				- slp : sleep(microsecond), <=0 means pause until input a char, >0 means pause for specific microseconds
   * tips:
-  * 1. Use "keyboard_listener.exe" to get position data.
-  *		How to: keep console window on top, click any keyboard to get current mouse position, click '.' to exit
+  * 1. Use "keymouse_listener.exe" to get position data and command codes.
+  *		NOTE: keep console window on top if u need to use keyboard, click 'Esc' to exit.
   * 2. Edit "$input.txt" to realize your own simulate function.
   *	3. PC's screen resolution doesn't matter.
   *	4. How to use pause function:
