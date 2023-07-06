@@ -16,7 +16,7 @@ int main()
 {
 	initial();
 
-	printf("* Welcome to $imulatorV1.1!~\n");
+	printf("* Welcome to $imulatorV1.1~\n");
 	printf("* Screen_x = %d px; Screen_y = %d px.\n",screen_x,screen_y);
 	printf("-------------------------------------------------\n");
 	
