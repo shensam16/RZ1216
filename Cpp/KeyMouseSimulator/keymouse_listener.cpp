@@ -17,8 +17,11 @@ int main() {
 	while (true) {
 		Sleep(100);                  			//等待100毫秒，减少CPU占用
 		if (KEY_DOWN(VK_ESCAPE))				//Esc键按下,退出循环
+		{
 			break;
-		else {
+		}
+		else 
+		{
 			if (KEY_DOWN(VK_LBUTTON)) {  			//鼠标左键按下
 				POINT pt;
 				BOOL bReturn;
@@ -49,6 +52,7 @@ int main() {
 			}
 		}
 	}
+	cout << "Press any key to exit...";
 	getchar();
 	return 0;
 }

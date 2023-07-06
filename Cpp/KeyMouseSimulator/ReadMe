@@ -1,0 +1,14 @@
+#0
+built by i586-mingw32msvc-g++ (linux Ubuntu)
+#1
+sudo gedit /etc/apt/sources.list
+deb http://us.archive.ubuntu.com/ubuntu trusty main universe
+#2
+sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 40976EAF437D05B5
+sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 3B4FE6ACC0B21F32
+sudo apt-get update
+sudo apt-get install mingw32
+#3
+i586-mingw32msvc-g++ keymouse_simulator.cpp -o WinSimulator.exe
+#4 (from windows terminal, for example)
+scp username@ipAddress:/xxxxxxxxxx/WinSimulator.exe D:\xxxxxxx
