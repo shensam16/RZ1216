@@ -51,42 +51,32 @@ input[type=file] {
 
 </head>
 <body>
-<main>
-    <div style="margin-left:15px;margin-top:20px;text-align:center;">
-        <div id="fileZone">
-            <div class="input-group"  style="width:60%;display: inline-table;">
-                <input type="file" class="form-control" name="file" id="filePicker" onchange="fileLoad();" />
-                <span class="input-group-addon" onclick="fileLoad();" ><i class="fa fa-cloud-download" aria-hidden="true"></i></span>
-            </div>
-            </br></br>
-            <div id="resultListDiv">
-            <textarea id="resultList" class="form-control" style="width:60%;height:40%;overflow:auto;" onchange="Reset();" >抽签名单&#13;一行一个&#13;支持去除空格及空行</textarea>
-            </div>
+<div style="margin-left:15px;margin-top:20px;text-align:center;">
+    <div id="fileZone">
+        <div class="input-group"  style="width:60%;display: inline-table;">
+            <input type="file" class="form-control" name="file" id="filePicker" onchange="fileLoad();" />
+            <span class="input-group-addon" onclick="fileLoad();" ><i class="fa fa-cloud-download" aria-hidden="true"></i></span>
         </div>
-        </br>
-        <div id="controlZone" style="margin-left:20px;">
-            <div class="btn-group btn-group-lg">
-                <input type="button" id="load" class="btn btn-default" onclick="fileLoad(); " value="Load"></input>
-                <input type="button" id="check" class="btn btn-default" onclick="Check();" value="Check"></input>
-            </div>
-            </br>
-            </br>
-            <div class="input-group"  style="width:200px;display: inline-table;">
-                <span class="input-group-addon">单次抽签个数</span>
-                <input type="number" id="num" min="1" value="1" class="form-control" required />
-            </div>
-            </br>
-            </br>
-            &nbsp;&nbsp;<input type="button" id="go" class="btn btn-success btn-lg" onclick="Go();" value="Start"></input>
-            &nbsp;&nbsp;<input type="button" id="reset" class="btn btn-danger btn-lg" onclick="Reset();" value="Reset"></input>
-            &nbsp;&nbsp;<input type="button" id="show" class="btn btn-info btn-lg" onclick="Show();" value="Result"></input>
-        </div>
-        </br>
-        <div id="resultZone" style="width:100%;text-align:center;margin-bottom:50px;">
-            <label id="resultLabel" style="font-size:40px;"></label>
+        </br></br>
+        <div id="resultListDiv">
+        <textarea id="resultList" class="form-control" style="width:60%;height:40%;overflow:auto;" onchange="Reset();" >抽签名单&#13;一行一个&#13;支持去除空格及空行</textarea>
         </div>
     </div>
-</main>
+    </br>
+    <div id="controlZone" style="margin-left:20px;">
+        <div class="btn-group btn-group-lg">
+            <button type="button" id="load" class="btn btn-default" onclick="fileLoad(); ">Load</button>
+            <button type="button" id="check" class="btn btn-default" onclick="Check();" >Check</button>
+        </div>
+            &nbsp;&nbsp;<button type="button" id="btn1" class="btn btn-success btn-lg" onclick="Go();" >Start</button>
+            &nbsp;&nbsp;<button type="button" id="reset" class="btn btn-danger btn-lg" onclick="Reset();" >Reset</button>
+            &nbsp;&nbsp;<button type="button" id="show" class="btn btn-info btn-lg" onclick="Show();" >Result</button>
+    </div>
+    </br>
+    <div id="resultZone" style="width:100%;text-align:center;">
+        <label id="resultLabel" style="font-size:50px;">简易抽签器 v1.2</label>
+    </div>
+</div>
 <footer class="fixed-bottom">
 <p>Developed by $K from <a href="https://github.com/shensam16/RZ1216" target="_blank">RZ1216</a></p>
 <footer>
@@ -110,8 +100,6 @@ $(document).ready(function() {
 var reloadFlag = true;
 //name list
 var arrResult = new Array();
-//for num
-var singleNum = 1;
 //is selected
 var arrResultFlag = new Array();
 //Count(selected guys)
@@ -129,11 +117,9 @@ function getMax(a, b)
 function Reset()
 {
     reloadFlag = true;
-    document.getElementById("resultLabel").innerText = "简易抽签器 v1.3";
-    document.getElementById("go").value = "Start";
-    document.getElementById("num").readOnly = false;
+    document.getElementById("resultLabel").innerText = "简易抽签器 v1.2";
+    document.getElementById("btn1").value = "Start";
     document.getElementById("resultList").readOnly = false;
-    document.getElementById("go").disabled = false;
     document.getElementById("load").disabled = false;
     document.getElementById("check").disabled = false;
     recordFlag = false;
@@ -159,7 +145,6 @@ function fileLoad()
 //Print lines without Space and bad lines
 function Check()
 {
-
     resultListLoad();
     var distinctStr = "";
     var index = 0;
@@ -173,11 +158,6 @@ function Check()
 //get list from file
 function resultListLoad()
 {
-    //check num
-    singleNum = document.getElementById("num").value;
-    if (singleNum < 1 ) {
-        return false;
-    }
     arrResult.length = 0;
     arrResultFlag.length = 0;
     var str = document.getElementById("resultList").value;
@@ -202,7 +182,6 @@ function resultListLoad()
     for(i = 0; i < arrResult.length; i++) {
         arrResultFlag[i] = false;
     }
-    return true;
 }
 
 //is changing
@@ -212,71 +191,45 @@ var recordIndex = 0;
 //for loop
 var recordCount = 0;
 var recordMax = 0;
-var recordNum = 0;
-var recordTemp = "";
+let timerInterval
 function Go()
 {
     if(reloadFlag) {    //initial at the first time
-        if (!resultListLoad()) {
-            Swal.fire({
-            position: 'center',
-            icon: 'error',
-            title: '单次抽签个数应大于0!',
-            showConfirmButton: false,
-            timer: 2000,
-            timerProgressBar: true
-            });
-            return;
-        }
-        document.getElementById("go").value = "Next";
-        document.getElementById("num").readOnly = true;
         document.getElementById("resultList").readOnly = true;
         document.getElementById("load").disabled = true;
         document.getElementById("check").disabled = true;
+        document.getElementById("btn1").value = "Next";
+        resultListLoad();
         reloadFlag = false;
-        recordTemp = "";
     }
-    document.getElementById("go").disabled = true;
-    if (luckyCount >= arrResult.length) {
-        return;
-    }
-    recordNum = 0;
-    random();
+    if(luckyCount >= arrResult.length)return;
+    recordMax = getRandom(getMax(30, Math.ceil(arrResult.length/9)*5), getMax(50, Math.ceil(arrResult.length/9)*10));
+    console.log("Random:"+recordMax);
+    recordCount = 0;
     recordFlag = true;
-    let timerInterval = setInterval(() => {
-    if(recordFlag) {
+    timerInterval = setInterval(() => {
+      if(recordFlag) {
         if(recordCount <= recordMax) {
             recordCount++;
             recordIndex = (++recordIndex) % arrResult.length;
             while(arrResultFlag[recordIndex]) {
-                recordIndex = (recordIndex + getRandom(1, arrResult.length)) % arrResult.length;
+                recordIndex = (++recordIndex) % arrResult.length;
             }
-            document.getElementById("resultLabel").innerText = recordTemp + arrResult[recordIndex];
+            document.getElementById("resultLabel").innerText = arrResult[recordIndex];
         } else {
-            recordTemp += arrResult[recordIndex] + "\n";
-            document.getElementById("resultLabel").innerText = recordTemp;
-            console.log("Lucky Guy:" + arrResult[recordIndex]);
-            arrResultFlag[recordIndex] = true;
-            recordNum++;
-            luckyCount++;
-            if (recordNum >= singleNum || luckyCount >= arrResult.length) {
-                recordFlag = false;
-                clearInterval(timerInterval);
-                if (luckyCount < arrResult.length) {
-                    document.getElementById("go").disabled = false;
-                }
+            recordFlag = false;
+            if(arrResultFlag[recordIndex]) {
+                Go();
             } else {
-                random();
+                document.getElementById("resultLabel").innerText = arrResult[recordIndex];
+                console.log("Lucky Guy:" + arrResult[recordIndex]);
+                arrResultFlag[recordIndex] = true;
+                luckyCount++;
+                clearInterval(timerInterval);
             }
         }
-    }
+      }
     }, 100);
-}
-
-function random() {
-    recordCount = 0;
-    recordMax = getRandom(getMax(30, Math.ceil(arrResult.length/9)*5), getMax(50, Math.ceil(arrResult.length/9)*10));
-    console.log("Random:"+recordMax);
 }
 
 function getRandom(lower, upper) {
